@@ -22,69 +22,84 @@ body {
     background: var(--background-color);
     color: var(--text-color);
     position: relative;
-    overflow-y: auto; 
+    overflow-y: auto;
 }
 
-/* ===== GRID BACKGROUND (IMPROVED) ===== */
+/* =========================
+   GLOBAL COLORS
+========================= */
+:root {
+    --bg-color: #ffffff;
+
+    /* GRID COLORS */
+    --grid-soft: rgba(70, 90, 255, 0.10);
+    --grid-strong: rgba(70, 90, 255, 0.22);
+
+    /* GLOW */
+    --grid-glow: rgba(70, 90, 255, 0.25);
+}
+
+/* =========================
+   GRID BACKGROUND
+========================= */
 .grid-bg {
     position: fixed;
     inset: 0;
-    z-index: 0;
-    pointer-events: none;
+    z-index: -1;
+    background-color: var(--bg-color);
 
-    /* Two grid scales = depth */
-    background:
-        repeating-linear-gradient(
-            0deg,
-            rgba(0, 0, 0, 0.035),
-            rgba(0, 0, 0, 0.035) 1px,
+    background-image:
+        /* small grid */
+        repeating-linear-gradient(0deg,
+            var(--grid-soft),
+            var(--grid-soft) 1px,
             transparent 1px,
-            transparent 28px
-        ),
-        repeating-linear-gradient(
-            90deg,
-            rgba(0, 0, 0, 0.035),
-            rgba(0, 0, 0, 0.035) 1px,
+            transparent 32px),
+        repeating-linear-gradient(90deg,
+            var(--grid-soft),
+            var(--grid-soft) 1px,
             transparent 1px,
-            transparent 28px
-        ),
-        repeating-linear-gradient(
-            0deg,
-            rgba(0, 0, 0, 0.06),
-            rgba(0, 0, 0, 0.06) 1px,
-            transparent 1px,
-            transparent 120px
-        ),
-        repeating-linear-gradient(
-            90deg,
-            rgba(0, 0, 0, 0.06),
-            rgba(0, 0, 0, 0.06) 1px,
-            transparent 1px,
-            transparent 120px
-        );
+            transparent 32px),
 
-    animation: moveGrid 40s linear infinite;
+        /* large grid */
+        repeating-linear-gradient(0deg,
+            var(--grid-strong),
+            var(--grid-strong) 1px,
+            transparent 1px,
+            transparent 160px),
+        repeating-linear-gradient(90deg,
+            var(--grid-strong),
+            var(--grid-strong) 1px,
+            transparent 1px,
+            transparent 160px);
+
+    animation: gridMove 40s linear infinite;
 }
 
-/* Depth overlay (this is the magic) */
+/* =========================
+   SUBTLE GLOW OVERLAY
+========================= */
 .grid-bg::after {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(
-        circle at top,
-        rgba(0, 0, 0, 0.05),
-        transparent 60%
-    );
+    background:
+        radial-gradient(circle at center,
+            var(--grid-glow),
+            transparent 65%);
+    pointer-events: none;
 }
 
-/* Slower = more premium */
-@keyframes moveGrid {
+/* =========================
+   ANIMATION
+========================= */
+@keyframes gridMove {
     from {
         background-position: 0 0, 0 0, 0 0, 0 0;
     }
+
     to {
-        background-position: 600px 600px, 600px 600px, 300px 300px, 300px 300px;
+        background-position: 320px 320px, 320px 320px, 640px 640px, 640px 640px;
     }
 }
 
@@ -203,13 +218,27 @@ body {
 
 /* ===== ANIMATIONS ===== */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes buttonFadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* ===== RESPONSIVE ===== */
