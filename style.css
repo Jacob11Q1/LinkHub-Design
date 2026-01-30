@@ -25,30 +25,67 @@ body {
     overflow-y: auto; 
 }
 
-/* ===== GRID BACKGROUND ===== */
+/* ===== GRID BACKGROUND (IMPROVED) ===== */
 .grid-bg {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: repeating-linear-gradient(0deg,
-            rgba(0, 0, 0, 0.03),
-            rgba(0, 0, 0, 0.03) 1px,
-            transparent 1px,
-            transparent 30px),
-        repeating-linear-gradient(90deg,
-            rgba(0, 0, 0, 0.03),
-            rgba(0, 0, 0, 0.03) 1px,
-            transparent 1px,
-            transparent 30px);
+    inset: 0;
     z-index: 0;
-    animation: moveGrid 20s linear infinite;
+    pointer-events: none;
+
+    /* Two grid scales = depth */
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.035),
+            rgba(0, 0, 0, 0.035) 1px,
+            transparent 1px,
+            transparent 28px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.035),
+            rgba(0, 0, 0, 0.035) 1px,
+            transparent 1px,
+            transparent 28px
+        ),
+        repeating-linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.06),
+            rgba(0, 0, 0, 0.06) 1px,
+            transparent 1px,
+            transparent 120px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.06),
+            rgba(0, 0, 0, 0.06) 1px,
+            transparent 1px,
+            transparent 120px
+        );
+
+    animation: moveGrid 40s linear infinite;
 }
 
+/* Depth overlay (this is the magic) */
+.grid-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at top,
+        rgba(0, 0, 0, 0.05),
+        transparent 60%
+    );
+}
+
+/* Slower = more premium */
 @keyframes moveGrid {
-    0% { background-position: 0 0, 0 0; }
-    100% { background-position: 500px 500px, 500px 500px; }
+    from {
+        background-position: 0 0, 0 0, 0 0, 0 0;
+    }
+    to {
+        background-position: 600px 600px, 600px 600px, 300px 300px, 300px 300px;
+    }
 }
 
 /* ===== CONTAINER ===== */
