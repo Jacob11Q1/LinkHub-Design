@@ -18,9 +18,12 @@ LinkHub Premium is a fully responsive, modern Linktree-style profile page. It fe
 
 ---
 
+# DEMO
+    Live Demo Link:  
+
 ## Installation
 
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/YourUsername/LinkHub-Premium.git
+git clone https://github.com/Jacob11Q1/LinkHub-Design
