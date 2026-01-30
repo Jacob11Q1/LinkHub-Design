@@ -19,7 +19,7 @@ LinkHub Premium is a fully responsive, modern Linktree-style profile page. It fe
 ---
 
 # DEMO
-    Live Demo Link:  
+    Live Demo Link: https://jacob11q1.github.io/LinkHub-Design/ 
 
 ## Installation
 
